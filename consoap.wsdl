@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:tns="http://xmlns.example.com/1561850008611/addImpl/SOAP" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/" name="Untitled" targetNamespace="http://xmlns.example.com/1561850008611/addImpl/SOAP">
+    <wsdl:types/>
+    <wsdl:service name="Process_sp_Definition">
+        <wsdl:port name="SOAPEventSource" binding="tns:SOAPEventSourceBinding">
+            <soap:address location="http://localhost:8899/SOAP/Process%20Definition"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="PortType">
+        <wsdl:operation name="add">
+            <wsdl:input message="tns:input"/>
+            <wsdl:output message="tns:output"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SOAPEventSourceBinding" type="tns:PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="add">
+            <soap:operation style="rpc" soapAction="/SOAP/Process%20Definition" soapActionRequired="true"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://InputMessageNamespace" parts="part1 part2"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://OutputMessageNamespace" parts="part1"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="input">
+        <wsdl:part name="part1" type="xs:string"/>
+        <wsdl:part name="part2" type="xs:string"/>
+    </wsdl:message>
+    <wsdl:message name="output">
+        <wsdl:part name="part1" type="xs:string"/>
+    </wsdl:message>
+</wsdl:definitions>
